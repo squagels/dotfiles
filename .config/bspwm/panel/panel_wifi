@@ -1,0 +1,28 @@
+#!/bin/bash
+
+Wifi() {
+
+    WIFI=`iw dev wlp2s0 station dump | grep 'signal:' | awk '{gsub("-",""); print $2}'`
+    SSID=`iw dev wlp2s0 link | grep 'SSID:' | awk '{gsub(":",""); print $2}'`
+
+    S="•"
+
+    case $WIFI in
+        [0-30])   BAR="$S$S$S$S";;
+        [31-55]*) BAR="$S$S$S\f0$S";;
+        [56-75]*) BAR="$S$S\f0$S$S";;
+        [76-90]*) BAR="$S\f0$S$S$S";;
+        *)        BAR="\f0$S$S$S$S";;
+    esac
+
+    if [ "$SSID" != "" ]; then
+        echo "I$SSID \f3$BAR"
+    else
+        echo "IN/A \f3$BAR"
+    fi
+}
+
+while true; do
+    echo $(Wifi)
+    sleep 1;
+done

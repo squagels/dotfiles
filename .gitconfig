@@ -1,0 +1,13 @@
+[user]
+	name = Dion DeFranco
+	email = diondefranco@gmail.com
+[credential]
+	helper = cache --timeout=3600
+[core]
+	editor = nano -w
+[color]
+	ui = true
+[alias]
+	graph = log --graph --oneline --decorate
+[push]
+	default = simple

@@ -1,0 +1,37 @@
+#! /bin/bash
+
+Volume() {
+
+    STATUS=$(amixer get Master | tail -n 1 | cut -d '[' -f 4 | sed 's/].*//g')
+    VOLUME=$(amixer get Master | tail -n 1 | cut -d '[' -f 2 | sed 's/%.*//g')
+
+    PRE="VOL"
+    S="-"
+
+    case $VOLUME in
+        100)   BAR="$S$S$S$S$S$S$S$S$S$S\f0";;
+        0)     BAR="\f0$S$S$S$S$S$S$S$S$S$S";;
+        1*)    BAR="$S\f0$S$S$S$S$S$S$S$S$S";;
+        2*)    BAR="$S$S\f0$S$S$S$S$S$S$S$S";;
+        3*)    BAR="$S$S$S\f0$S$S$S$S$S$S$S";;
+        4*)    BAR="$S$S$S$S\f0$S$S$S$S$S$S";;
+        5*)    BAR="$S$S$S$S$S\f0$S$S$S$S$S";;
+        6*)    BAR="$S$S$S$S$S$S\f0$S$S$S$S";;
+        7*)    BAR="$S$S$S$S$S$S$S\f0$S$S$S";;
+        8*)    BAR="$S$S$S$S$S$S$S$S\f0$S$S";;
+        9*)    BAR="$S$S$S$S$S$S$S$S$S\f0$S";;
+        *)     BAR="$S$S$S$S$S$S$S$S$S$S\f0";;
+    esac
+
+    if [ "$STATUS" = "off" ]; then
+        PRE="\f0VOL"
+        BAR="\f0$S$S$S$S$S$S$S$S$S$S"
+    fi
+
+    echo "V$PRE \f3$BAR"
+}
+
+while true; do
+    echo $(Volume)
+    sleep 0.1;
+done

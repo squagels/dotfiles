@@ -1,0 +1,43 @@
+#!/bin/bash
+
+Battery() {
+
+    BATTERY=`acpi -b | awk '{gsub(/%,/,""); print $4}' | sed 's/%//g'`
+    STATUS=`acpi -b | awk '{gsub(/,/,""); print $3}'`
+
+    if [[ $STATUS != "Discharging" ]]; then
+        PRE=""
+    elif [[ $BATTERY -lt 10 ]]; then
+        PRE="\f9"
+    elif [[ $BATTERY -lt 40 ]]; then
+        PRE=""
+    elif [[ $BATTERY -lt 70 ]]; then
+        PRE=""
+    else
+        PRE=""
+    fi
+
+    S="-"
+
+    case $BATTERY in
+        100)    BAR="$S$S$S$S$S$S$S$S$S$S\f0";;
+        [0-9])  BAR="\f9$S\f0$S$S$S$S$S$S$S$S";;
+        1*)     BAR="$S$S\f0$S$S$S$S$S$S$S$S";;
+        2*)     BAR="$S$S$S\f0$S$S$S$S$S$S$S";;
+        3*)     BAR="$S$S$S$S\f0$S$S$S$S$S$S";;
+        4*)     BAR="$S$S$S$S$S\f0$S$S$S$S$S";;
+        5*)     BAR="$S$S$S$S$S$S\f0$S$S$S$S";;
+        6*)     BAR="$S$S$S$S$S$S$S\f0$S$S$S";;
+        7*)     BAR="$S$S$S$S$S$S$S$S\f0$S$S";;
+        8*)     BAR="$S$S$S$S$S$S$S$S$S\f0$S";;
+        9*)     BAR="$S$S$S$S$S$S$S$S$S$s\f0";;
+        *)      BAR="$0$S$S$S$S$S$S$S$S$S\f0";;
+    esac
+
+    echo "B$PRE$BATTERY% \f3$BAR"
+}
+
+while true; do
+    echo $(Battery)
+    sleep 1;
+done

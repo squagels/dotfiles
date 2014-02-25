@@ -1,0 +1,66 @@
+#! /bin/sh
+
+while read -r line ; do
+    case $line in
+        B*)
+            # battery output
+            battery="\\br\\f7${line#?}\f7"
+            ;;
+        V*)
+            # volume output
+            volume="\\br\\f7${line#?}\f7"
+            ;;
+        I*)
+            # wifi output
+            wifi="\\br\\f7${line#?}\f7"
+            ;;
+        S*)
+            # clock output
+            sys_infos="\\br\\f7${line#?}\f7"
+            ;;
+        T*)
+            # xtitle output
+            title="\\br\\f7${line#?}\f7"
+            ;;
+        W*)
+            # bspwm internal state
+            wm_infos=""
+            IFS=':'
+            set -- ${line#?}
+            while [ $# -gt 0 ] ; do
+                item=$1
+                name=${item#?}
+                case $item in
+                    O*)
+                        # focused occupied desktop
+                        wm_infos="$wm_infos \\u3\\br\\f7${name}\\ur  "
+                        ;;
+                    F*)
+                        # focused free desktop
+                        wm_infos="$wm_infos \\u3\\br\\f7${name}\\ur  "
+                        ;;
+                    U*)
+                        # focused urgent desktop
+                        wm_infos="$wm_infos \\u9\\br\\f7${name}\\ur  "
+                        ;;
+                    o*)
+                        # occupied desktop
+                        wm_infos="$wm_infos \\u0\\br\\fr${name}\\ur  "
+                        ;;
+                    f*)
+                        # free desktop
+                        wm_infos="$wm_infos \\br\\fr${name}  "
+                        ;;
+                    u*)
+                        # urgent desktop
+                        wm_infos="$wm_infos \\b1\\fr${name}  "
+                        ;;
+                esac
+                shift
+            done
+            ;;
+    esac
+
+    printf "%s\n" "\\l $wm_infos \\c $title \\r $volume     $battery     $wifi     $sys_infos  "
+
+done

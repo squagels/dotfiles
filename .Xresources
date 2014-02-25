@@ -1,0 +1,62 @@
+! font --------------------------------------------------------------------------
+
+*font:			        -benis-lemon-medium-r-normal--10-110-75-75-m-50-ISO8859-1
+*boldFont:		        -benis-lemon-medium-r-normal--10-110-75-75-m-50-ISO8859-1
+
+! colors ------------------------------------------------------------------------
+
+! Ivory Dark
+! https://bbs.archlinux.org/viewtopic.php?pid=1231104#p1231104
+
+*background:            #2D2C28
+*foreground:            #A4A6AB
+*colorBD:               #DBDDE2
+*colorIT:               #DBDDE2
+*colorUL:               #DBDDE2
+*cursorColor:           #53CAD9
+! Black
+*color0:                #5B5955
+*color8:                #707277
+! White
+*color7:                #DBDDE2
+*color15:               #F7F9FF
+! Red
+*color1:                #C4756E
+*color9:                #F6A299
+! Yellow
+*color3:                #9B8A4B
+*color11:               #CAB775
+! Green
+*color2:                #559A6A
+*color10:               #82C896
+! Cyan
+*color6:                #019BAA
+*color14:               #53CAD9
+! Blue
+*color4:                #6A8DCA
+*color12:               #98BBFB
+! Magenta   
+*color5:                #B577AC
+*color13:               #E5A4DB
+
+! urxvt -------------------------------------------------------------------------
+
+urxvt*geometry:         108x40
+urxvt*background:       [65]#000000
+urxvt*scrollBar:        false
+urxvt*internalBorder:   20
+urxvt*depth:            32
+urxvt*loginShell:       true
+
+! Xcursor -----------------------------------------------------------------------
+
+Xcursor.theme:          Vanilla-DMZ-AA
+Xcursor.size:           22
+
+! Fonts -------------------------------------------------------------------------
+
+Xft.dpi:                96
+Xft.antialias:          true
+Xft.rgba:               rgb
+Xft.hinting:            true
+Xft.hintstyle:          hintslight
